@@ -1,0 +1,88 @@
+# depslib dependency file v1.0
+1715858481 source:c:\users\kraskir\desktop\лаб 4\lab 4\main.c
+	<windows.h>
+	<gl/gl.h>
+	"stb-master/stb_image.h"
+	"stb-master/stb_easy_font.h"
+	<math.h>
+	<float.h>
+
+1711632518 c:\users\kraskir\desktop\лаб 4\lab 4\stb-master\stb_image.h
+	"stb_image.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<assert.h>
+	<stdint.h>
+	<emmintrin.h>
+	<intrin.h>
+	<arm_neon.h>
+
+1711632518 c:\users\kraskir\desktop\лаб 4\lab 4\stb-master\stb_easy_font.h
+	<stdlib.h>
+	<math.h>
+
+1715858481 source:c:\users\mvide\desktop\Р»Р°Р± 4\lab 4\main.c
+	<windows.h>
+	<gl/gl.h>
+	"stb-master/stb_image.h"
+	"stb-master/stb_easy_font.h"
+	<math.h>
+	<float.h>
+
+1711632518 c:\users\mvide\desktop\Р»Р°Р± 4\lab 4\stb-master\stb_image.h
+	"stb_image.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<assert.h>
+	<stdint.h>
+	<emmintrin.h>
+	<intrin.h>
+	<arm_neon.h>
+
+1711632518 c:\users\mvide\desktop\Р»Р°Р± 4\lab 4\stb-master\stb_easy_font.h
+	<stdlib.h>
+	<math.h>
+
+1715960359 source:c:\users\kraskir\desktop\лаб 4\лаб 4\lab 4\main.c
+	<windows.h>
+	<gl/gl.h>
+	"stb-master/stb_image.h"
+	"stb-master/stb_easy_font.h"
+	<math.h>
+	<float.h>
+
+1711632518 c:\users\kraskir\desktop\лаб 4\лаб 4\lab 4\stb-master\stb_image.h
+	"stb_image.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<assert.h>
+	<stdint.h>
+	<emmintrin.h>
+	<intrin.h>
+	<arm_neon.h>
+
+1711632518 c:\users\kraskir\desktop\лаб 4\лаб 4\lab 4\stb-master\stb_easy_font.h
+	<stdlib.h>
+	<math.h>
+
