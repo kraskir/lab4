@@ -18,22 +18,22 @@
 
 
 
-int currentFrame = 0;          // Текущий кадр анимации
-const int totalFrames = 8;     // Всего кадров в спрайт-листе
-float frameWidth = 1.0f / 8.0f;  // Ширина одного кадра в текстурных координатах
+int currentFrame = 0;          // Г’ГҐГЄГіГ№ГЁГ© ГЄГ Г¤Г° Г Г­ГЁГ¬Г Г¶ГЁГЁ
+const int totalFrames = 8;     // Г‚Г±ГҐГЈГ® ГЄГ Г¤Г°Г®Гў Гў Г±ГЇГ°Г Г©ГІ-Г«ГЁГ±ГІГҐ
+float frameWidth = 1.0f / 8.0f;  // ГГЁГ°ГЁГ­Г  Г®Г¤Г­Г®ГЈГ® ГЄГ Г¤Г°Г  Гў ГІГҐГЄГ±ГІГіГ°Г­Г»Гµ ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГ Гµ
 int isMoving = 0;
-float jumpSpeed = 45.0f; // Начальная скорость прыжка
-float gravity = -5.0f; // Ускорение, действующее на персонажа при падении
-float verticalVelocity = 0.0f; // Вертикальная скорость персонажа
+float jumpSpeed = 45.0f; // ГЌГ Г·Г Г«ГјГ­Г Гї Г±ГЄГ®Г°Г®Г±ГІГј ГЇГ°Г»Г¦ГЄГ 
+float gravity = -5.0f; // Г“Г±ГЄГ®Г°ГҐГ­ГЁГҐ, Г¤ГҐГ©Г±ГІГўГіГѕГ№ГҐГҐ Г­Г  ГЇГҐГ°Г±Г®Г­Г Г¦Г  ГЇГ°ГЁ ГЇГ Г¤ГҐГ­ГЁГЁ
+float verticalVelocity = 0.0f; // Г‚ГҐГ°ГІГЁГЄГ Г«ГјГ­Г Гї Г±ГЄГ®Г°Г®Г±ГІГј ГЇГҐГ°Г±Г®Г­Г Г¦Г 
 float maxYVelocity = 47.0f;
-bool isJumping = false; // Находится ли персонаж в прыжке
-float groundLevel = 0.0f; // Уровень "земли", ниже которого персонаж не может опуститься
-bool isAirborne = false;  // Переменная для проверки, находится ли персонаж в воздухе
-int jumpFrame = 0; // Текущий кадр анимации прыжка
-int jumpAnimationPlaying = 0; // Индикатор проигрывания анимации прыжка
+bool isJumping = false; // ГЌГ ГµГ®Г¤ГЁГІГ±Гї Г«ГЁ ГЇГҐГ°Г±Г®Г­Г Г¦ Гў ГЇГ°Г»Г¦ГЄГҐ
+float groundLevel = 0.0f; // Г“Г°Г®ГўГҐГ­Гј "Г§ГҐГ¬Г«ГЁ", Г­ГЁГ¦ГҐ ГЄГ®ГІГ®Г°Г®ГЈГ® ГЇГҐГ°Г±Г®Г­Г Г¦ Г­ГҐ Г¬Г®Г¦ГҐГІ Г®ГЇГіГ±ГІГЁГІГјГ±Гї
+bool isAirborne = false;  // ГЏГҐГ°ГҐГ¬ГҐГ­Г­Г Гї Г¤Г«Гї ГЇГ°Г®ГўГҐГ°ГЄГЁ, Г­Г ГµГ®Г¤ГЁГІГ±Гї Г«ГЁ ГЇГҐГ°Г±Г®Г­Г Г¦ Гў ГўГ®Г§Г¤ГіГµГҐ
+int jumpFrame = 0; // Г’ГҐГЄГіГ№ГЁГ© ГЄГ Г¤Г° Г Г­ГЁГ¬Г Г¶ГЁГЁ ГЇГ°Г»Г¦ГЄГ 
+int jumpAnimationPlaying = 0; // Г€Г­Г¤ГЁГЄГ ГІГ®Г° ГЇГ°Г®ГЁГЈГ°Г»ГўГ Г­ГЁГї Г Г­ГЁГ¬Г Г¶ГЁГЁ ГЇГ°Г»Г¦ГЄГ 
 const float blockSize = 40.0f;
 bool isFlipped = false;
-bool isWallHit = false; // Флаг столкновения со стеной
+bool isWallHit = false; // Г”Г«Г ГЈ Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГї Г±Г® Г±ГІГҐГ­Г®Г©
 bool gameStarted = false;
 
 GLuint textureSprite1, textureSprite2, textureSprite3, textureBackground;
@@ -60,13 +60,13 @@ char TileMap[H][W] = {
     "GHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHG",
 };
 typedef struct {
-    float x, y;          // Позиция
-    float dx, dy;        // Скорость
-    bool isAirborne;     // Находится ли в воздухе
-    bool isMoving;       // Двигается ли
-    float width, height; // Размеры героя
-    bool jumpPeakReached;// Достигнут ли пик прыжка
-    bool isFlipped;     // Флаг для поворота персонажа
+    float x, y;          // ГЏГ®Г§ГЁГ¶ГЁГї
+    float dx, dy;        // Г‘ГЄГ®Г°Г®Г±ГІГј
+    bool isAirborne;     // ГЌГ ГµГ®Г¤ГЁГІГ±Гї Г«ГЁ Гў ГўГ®Г§Г¤ГіГµГҐ
+    bool isMoving;       // Г„ГўГЁГЈГ ГҐГІГ±Гї Г«ГЁ
+    float width, height; // ГђГ Г§Г¬ГҐГ°Г» ГЈГҐГ°Г®Гї
+    bool jumpPeakReached;// Г„Г®Г±ГІГЁГЈГ­ГіГІ Г«ГЁ ГЇГЁГЄ ГЇГ°Г»Г¦ГЄГ 
+    bool isFlipped;     // Г”Г«Г ГЈ Г¤Г«Гї ГЇГ®ГўГ®Г°Г®ГІГ  ГЇГҐГ°Г±Г®Г­Г Г¦Г 
 } Hero;
 Hero hero = { .x = 0.0f, .y = 0.0f, .dx = 0.0f, .dy = 0.0f, .isAirborne = true, .width = 35.0f, .height = 80.0f };
 
@@ -77,10 +77,10 @@ void DrawCollision() {
             char tile = TileMap[i][j];
             glColor3f(1.0f, 1.0f, 1.0f);
             switch(tile) {
-                case 'G': // Земля
+                case 'G': // Г‡ГҐГ¬Г«Гї
                     glColor3f(0.8f, 0.5f, 0.0f);
                     break;
-                case 'H': // Трава
+                case 'H': // Г’Г°Г ГўГ 
                     glColor3f(0.8f, 0.5f, 0.0f);
                     break;
 
@@ -89,10 +89,10 @@ void DrawCollision() {
             }
 
             glBegin(GL_QUADS);
-                glVertex2f(j * blockSize, i * blockSize); // Левая нижняя вершина
-                glVertex2f((j + 1) * blockSize, i * blockSize); // Правая нижняя вершина
-                glVertex2f((j + 1) * blockSize, (i + 1) * blockSize); // Правая верхняя вершина
-                glVertex2f(j * blockSize, (i + 1) * blockSize); // Левая верхняя вершина
+                glVertex2f(j * blockSize, i * blockSize); // Г‹ГҐГўГ Гї Г­ГЁГ¦Г­ГїГї ГўГҐГ°ГёГЁГ­Г 
+                glVertex2f((j + 1) * blockSize, i * blockSize); // ГЏГ°Г ГўГ Гї Г­ГЁГ¦Г­ГїГї ГўГҐГ°ГёГЁГ­Г 
+                glVertex2f((j + 1) * blockSize, (i + 1) * blockSize); // ГЏГ°Г ГўГ Гї ГўГҐГ°ГµГ­ГїГї ГўГҐГ°ГёГЁГ­Г 
+                glVertex2f(j * blockSize, (i + 1) * blockSize); // Г‹ГҐГўГ Гї ГўГҐГ°ГµГ­ГїГї ГўГҐГ°ГёГЁГ­Г 
             glEnd();
         }
     }
@@ -127,54 +127,54 @@ GLuint LoadTexture(const char *filename)
 
 void Background(GLuint texture)
 {
-    // Координаты вершин соответствуют размерам окна
+    // ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГ» ГўГҐГ°ГёГЁГ­ Г±Г®Г®ГІГўГҐГІГ±ГІГўГіГѕГІ Г°Г Г§Г¬ГҐГ°Г Г¬ Г®ГЄГ­Г 
     static float vertices[] = {0.0f, 0.0f,  1920.0f, 0.0f,  1920.0f, 1080.0f,  0.0f, 1080.0f};
 
-    // Координаты текстуры от 0 до 1 для полного покрытия
+    // ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГ» ГІГҐГЄГ±ГІГіГ°Г» Г®ГІ 0 Г¤Г® 1 Г¤Г«Гї ГЇГ®Г«Г­Г®ГЈГ® ГЇГ®ГЄГ°Г»ГІГЁГї
     static float TexCord[] = {0, 0,  1, 0,  1, 1,  0, 1};
 
-    glClearColor(0, 0, 0, 0); // Задаем цвет очистки экрана, если будет необходимо
+    glClearColor(0, 0, 0, 0); // Г‡Г Г¤Г ГҐГ¬ Г¶ГўГҐГІ Г®Г·ГЁГ±ГІГЄГЁ ГЅГЄГ°Г Г­Г , ГҐГ±Г«ГЁ ГЎГіГ¤ГҐГІ Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г®
 
-    glEnable(GL_TEXTURE_2D); // Включаем 2D текстурирование
-    glBindTexture(GL_TEXTURE_2D, texture); // Привязываем текстуру
+    glEnable(GL_TEXTURE_2D); // Г‚ГЄГ«ГѕГ·Г ГҐГ¬ 2D ГІГҐГЄГ±ГІГіГ°ГЁГ°Г®ГўГ Г­ГЁГҐ
+    glBindTexture(GL_TEXTURE_2D, texture); // ГЏГ°ГЁГўГїГ§Г»ГўГ ГҐГ¬ ГІГҐГЄГ±ГІГіГ°Гі
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-    glVertexPointer(2, GL_FLOAT, 0, vertices); // Указываем массив вершин
-    glTexCoordPointer(2, GL_FLOAT, 0, TexCord); // Указываем массив координат текстуры
+    glVertexPointer(2, GL_FLOAT, 0, vertices); // Г“ГЄГ Г§Г»ГўГ ГҐГ¬ Г¬Г Г±Г±ГЁГў ГўГҐГ°ГёГЁГ­
+    glTexCoordPointer(2, GL_FLOAT, 0, TexCord); // Г“ГЄГ Г§Г»ГўГ ГҐГ¬ Г¬Г Г±Г±ГЁГў ГЄГ®Г®Г°Г¤ГЁГ­Г ГІ ГІГҐГЄГ±ГІГіГ°Г»
 
-    glDrawArrays(GL_QUADS, 0, 4); // Рисуем четырехугольник из 4 вершин
+    glDrawArrays(GL_QUADS, 0, 4); // ГђГЁГ±ГіГҐГ¬ Г·ГҐГІГ»Г°ГҐГµГіГЈГ®Г«ГјГ­ГЁГЄ ГЁГ§ 4 ГўГҐГ°ГёГЁГ­
 
-    glDisableClientState(GL_VERTEX_ARRAY); // Отключаем массив вершин
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY); // Отключаем массив координат текстуры
+    glDisableClientState(GL_VERTEX_ARRAY); // ГЋГІГЄГ«ГѕГ·Г ГҐГ¬ Г¬Г Г±Г±ГЁГў ГўГҐГ°ГёГЁГ­
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY); // ГЋГІГЄГ«ГѕГ·Г ГҐГ¬ Г¬Г Г±Г±ГЁГў ГЄГ®Г®Г°Г¤ГЁГ­Г ГІ ГІГҐГЄГ±ГІГіГ°Г»
 
-    glDisable(GL_TEXTURE_2D); // Отключаем 2D текстурирование
+    glDisable(GL_TEXTURE_2D); // ГЋГІГЄГ«ГѕГ·Г ГҐГ¬ 2D ГІГҐГЄГ±ГІГіГ°ГЁГ°Г®ГўГ Г­ГЁГҐ
 }
 
 
 
-// Функция для обновления текущего кадра
+// Г”ГіГ­ГЄГ¶ГЁГї Г¤Г«Гї Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГї ГІГҐГЄГіГ№ГҐГЈГ® ГЄГ Г¤Г°Г 
 
 void UpdateAnimationFrame() {
 
-        currentFrame = (currentFrame + 1) % totalFrames; // Циклическое обновление кадра
+        currentFrame = (currentFrame + 1) % totalFrames; // Г–ГЁГЄГ«ГЁГ·ГҐГ±ГЄГ®ГҐ Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГЄГ Г¤Г°Г 
 
 }
 
-// Функция рендеринга анимации
+// Г”ГіГ­ГЄГ¶ГЁГї Г°ГҐГ­Г¤ГҐГ°ГЁГ­ГЈГ  Г Г­ГЁГ¬Г Г¶ГЁГЁ
 void spriteAnimation(GLuint texture, float posX, float posY, float width, float height, float scale, int currentFrame, bool isFlipped) {
 
         float frameWidth = 1.0f / 8;
         float texLeft = currentFrame * frameWidth;
         float texRight = texLeft + frameWidth;
 
-        // Рассчитываем размеры спрайта с учетом масштаба
+        // ГђГ Г±Г±Г·ГЁГІГ»ГўГ ГҐГ¬ Г°Г Г§Г¬ГҐГ°Г» Г±ГЇГ°Г Г©ГІГ  Г± ГіГ·ГҐГІГ®Г¬ Г¬Г Г±ГёГІГ ГЎГ 
         float scaledWidth = width * scale;
         float scaledHeight = height * scale;
 
         if (isFlipped) {
-            // Если требуется развернуть спрайт влево, меняем порядок текстурных координат
+            // Г…Г±Г«ГЁ ГІГ°ГҐГЎГіГҐГІГ±Гї Г°Г Г§ГўГҐГ°Г­ГіГІГј Г±ГЇГ°Г Г©ГІ ГўГ«ГҐГўГ®, Г¬ГҐГ­ГїГҐГ¬ ГЇГ®Г°ГїГ¤Г®ГЄ ГІГҐГЄГ±ГІГіГ°Г­Г»Гµ ГЄГ®Г®Г°Г¤ГЁГ­Г ГІ
             float temp = texLeft;
             texLeft = texRight;
             texRight = temp;
@@ -185,10 +185,10 @@ void spriteAnimation(GLuint texture, float posX, float posY, float width, float 
 
         glColor3f(1,1,1);
         glBegin(GL_QUADS);
-            glTexCoord2f(texLeft, 0.0f); glVertex2f(posX, posY);                               // Левый верхний угол
-            glTexCoord2f(texRight, 0.0f); glVertex2f(posX + scaledWidth, posY);                 // Правый верхний угол
-            glTexCoord2f(texRight, 1.0f); glVertex2f(posX + scaledWidth, posY + scaledHeight);  // Правый нижний угол
-            glTexCoord2f(texLeft, 1.0f); glVertex2f(posX, posY + scaledHeight);                 // Левый нижний угол
+            glTexCoord2f(texLeft, 0.0f); glVertex2f(posX, posY);                               // Г‹ГҐГўГ»Г© ГўГҐГ°ГµГ­ГЁГ© ГіГЈГ®Г«
+            glTexCoord2f(texRight, 0.0f); glVertex2f(posX + scaledWidth, posY);                 // ГЏГ°Г ГўГ»Г© ГўГҐГ°ГµГ­ГЁГ© ГіГЈГ®Г«
+            glTexCoord2f(texRight, 1.0f); glVertex2f(posX + scaledWidth, posY + scaledHeight);  // ГЏГ°Г ГўГ»Г© Г­ГЁГ¦Г­ГЁГ© ГіГЈГ®Г«
+            glTexCoord2f(texLeft, 1.0f); glVertex2f(posX, posY + scaledHeight);                 // Г‹ГҐГўГ»Г© Г­ГЁГ¦Г­ГЁГ© ГіГЈГ®Г«
         glEnd();
 
         glDisable(GL_TEXTURE_2D);
@@ -197,22 +197,22 @@ void spriteAnimation(GLuint texture, float posX, float posY, float width, float 
 
 bool CheckCollision(float newX, float newY, Hero *hero, bool* isCeilingHit) {
     *isCeilingHit = false;
-    // Рассчитываем индексы тайлов, которые могут пересекаться с хитбоксом героя
+    // ГђГ Г±Г±Г·ГЁГІГ»ГўГ ГҐГ¬ ГЁГ­Г¤ГҐГЄГ±Г» ГІГ Г©Г«Г®Гў, ГЄГ®ГІГ®Г°Г»ГҐ Г¬Г®ГЈГіГІ ГЇГҐГ°ГҐГ±ГҐГЄГ ГІГјГ±Гї Г± ГµГЁГІГЎГ®ГЄГ±Г®Г¬ ГЈГҐГ°Г®Гї
     int leftTile = (int)(newX / TILE_SIZE);
-    int rightTile = (int)((newX + hero->width) / TILE_SIZE) + 1; // +1, чтобы учесть правую границу хитбокса
+    int rightTile = (int)((newX + hero->width) / TILE_SIZE) + 1; // +1, Г·ГІГ®ГЎГ» ГіГ·ГҐГ±ГІГј ГЇГ°Г ГўГіГѕ ГЈГ°Г Г­ГЁГ¶Гі ГµГЁГІГЎГ®ГЄГ±Г 
     int topTile = (int)(newY / TILE_SIZE);
-    int bottomTile = (int)((newY + hero->height) / TILE_SIZE) + 1; // +1, чтобы учесть нижнюю границу хитбокса
+    int bottomTile = (int)((newY + hero->height) / TILE_SIZE) + 1; // +1, Г·ГІГ®ГЎГ» ГіГ·ГҐГ±ГІГј Г­ГЁГ¦Г­ГѕГѕ ГЈГ°Г Г­ГЁГ¶Гі ГµГЁГІГЎГ®ГЄГ±Г 
 
-    // Проверка на столкновение с тайлами карты
+    // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГҐ Г± ГІГ Г©Г«Г Г¬ГЁ ГЄГ Г°ГІГ»
     for (int y = topTile; y < bottomTile; y++) {
         for (int x = leftTile; x < rightTile; x++) {
             char tile = TileMap[y][x];
 
             if (tile == 'G') {
-                isWallHit = true; // Устанавливаем флаг столкновения со стеной, если касаемся тайла 'G'
+                isWallHit = true; // Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГґГ«Г ГЈ Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГї Г±Г® Г±ГІГҐГ­Г®Г©, ГҐГ±Г«ГЁ ГЄГ Г±Г ГҐГ¬Г±Гї ГІГ Г©Г«Г  'G'
 
-                // Если персонаж движется влево и его правая граница хитбокса находится рядом с тайлом 'G',
-                // корректируем его позицию вправо от тайла
+                // Г…Г±Г«ГЁ ГЇГҐГ°Г±Г®Г­Г Г¦ Г¤ГўГЁГ¦ГҐГІГ±Гї ГўГ«ГҐГўГ® ГЁ ГҐГЈГ® ГЇГ°Г ГўГ Гї ГЈГ°Г Г­ГЁГ¶Г  ГµГЁГІГЎГ®ГЄГ±Г  Г­Г ГµГ®Г¤ГЁГІГ±Гї Г°ГїГ¤Г®Г¬ Г± ГІГ Г©Г«Г®Г¬ 'G',
+                // ГЄГ®Г°Г°ГҐГЄГІГЁГ°ГіГҐГ¬ ГҐГЈГ® ГЇГ®Г§ГЁГ¶ГЁГѕ ГўГЇГ°Г ГўГ® Г®ГІ ГІГ Г©Г«Г 
                 if (newX + hero->width > x * TILE_SIZE && newX + hero->width < (x + 1) * TILE_SIZE) {
                     hero->x -=hero->width/100;
                     hero->y=groundLevel;
@@ -220,8 +220,8 @@ bool CheckCollision(float newX, float newY, Hero *hero, bool* isCeilingHit) {
                     hero->dy=0;
                 }
 
-                // Если персонаж движется вправо и его левая граница хитбокса находится рядом с тайлом 'G',
-                // корректируем его позицию влево от тайла
+                // Г…Г±Г«ГЁ ГЇГҐГ°Г±Г®Г­Г Г¦ Г¤ГўГЁГ¦ГҐГІГ±Гї ГўГЇГ°Г ГўГ® ГЁ ГҐГЈГ® Г«ГҐГўГ Гї ГЈГ°Г Г­ГЁГ¶Г  ГµГЁГІГЎГ®ГЄГ±Г  Г­Г ГµГ®Г¤ГЁГІГ±Гї Г°ГїГ¤Г®Г¬ Г± ГІГ Г©Г«Г®Г¬ 'G',
+                // ГЄГ®Г°Г°ГҐГЄГІГЁГ°ГіГҐГ¬ ГҐГЈГ® ГЇГ®Г§ГЁГ¶ГЁГѕ ГўГ«ГҐГўГ® Г®ГІ ГІГ Г©Г«Г 
                 if (newX < (x + 1) * TILE_SIZE && newX > x * TILE_SIZE) {
                     hero->x = (x + 1) * TILE_SIZE;
                     hero->y=groundLevel;
@@ -229,28 +229,28 @@ bool CheckCollision(float newX, float newY, Hero *hero, bool* isCeilingHit) {
                     hero->dy=0;
                 }
 
-    return true; // Обнаружено столкновение
+    return true; // ГЋГЎГ­Г Г°ГіГ¦ГҐГ­Г® Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГҐ
             } else {
                 isWallHit = false;
             }
 
             if (tile == 'H'||tile == 'G') {
                 if (newY + hero->height > y * TILE_SIZE && newY < (y + 1) * TILE_SIZE) {
-                    // Проверка столкновения с тайлом лицом
-                    // Определяем, с какой стороны столкновение
+                    // ГЏГ°Г®ГўГҐГ°ГЄГ  Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГї Г± ГІГ Г©Г«Г®Г¬ Г«ГЁГ¶Г®Г¬
+                    // ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬, Г± ГЄГ ГЄГ®Г© Г±ГІГ®Г°Г®Г­Г» Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГҐ
                         if (newY + hero->height <= (y + 1) * TILE_SIZE) {
-                    // Столкновение с верхней частью тайла
+                    // Г‘ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГҐ Г± ГўГҐГ°ГµГ­ГҐГ© Г·Г Г±ГІГјГѕ ГІГ Г©Г«Г 
                     hero->y = y * TILE_SIZE - hero->height - 5;
                     hero->dy = 0;
                     *isCeilingHit = false;
                     return true;
                     }
                     else if (newY + hero->height > (y + 1) * TILE_SIZE) {
-                        // Столкновение с нижней частью тайла
+                        // Г‘ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГҐ Г± Г­ГЁГ¦Г­ГҐГ© Г·Г Г±ГІГјГѕ ГІГ Г©Г«Г 
                         hero->y = (y + 1) * TILE_SIZE;
-                        *isCeilingHit = true; // Устанавливаем флаг столкновения с потолком
+                        *isCeilingHit = true; // Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГґГ«Г ГЈ Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГї Г± ГЇГ®ГІГ®Г«ГЄГ®Г¬
                         verticalVelocity = 0;
-                        jumpAnimationPlaying = 0; // Останавливаем анимацию прыжка
+                        jumpAnimationPlaying = 0; // ГЋГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ Г Г­ГЁГ¬Г Г¶ГЁГѕ ГЇГ°Г»Г¦ГЄГ 
                             hero->dy=0;
                         hero->isAirborne = false;
                         return true;
@@ -260,31 +260,31 @@ bool CheckCollision(float newX, float newY, Hero *hero, bool* isCeilingHit) {
             }
         }
     }
-    return false; // Столкновений не обнаружено
+    return false; // Г‘ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГ© Г­ГҐ Г®ГЎГ­Г Г°ГіГ¦ГҐГ­Г®
 }
 bool isSolidTileAt(float x, float y) {
-    // Преобразуем координаты в индексы массива TileMap
+    // ГЏГ°ГҐГ®ГЎГ°Г Г§ГіГҐГ¬ ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГ» Гў ГЁГ­Г¤ГҐГЄГ±Г» Г¬Г Г±Г±ГЁГўГ  TileMap
     int tileX = (int)(x / TILE_SIZE);
     int tileY = (int)(y / TILE_SIZE);
 
-    // Проверяем, не выходят ли индексы за пределы массива
+    // ГЏГ°Г®ГўГҐГ°ГїГҐГ¬, Г­ГҐ ГўГ»ГµГ®Г¤ГїГІ Г«ГЁ ГЁГ­Г¤ГҐГЄГ±Г» Г§Г  ГЇГ°ГҐГ¤ГҐГ«Г» Г¬Г Г±Г±ГЁГўГ 
     if (tileX < 0 || tileX >= W || tileY < 0 || tileY >= H) {
-        return false; // Возвращаем false, если координаты вне диапазона карты
+        return false; // Г‚Г®Г§ГўГ°Г Г№Г ГҐГ¬ false, ГҐГ±Г«ГЁ ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГ» ГўГ­ГҐ Г¤ГЁГ ГЇГ Г§Г®Г­Г  ГЄГ Г°ГІГ»
     }
 
-    // Получаем символ тайла по индексам
+    // ГЏГ®Г«ГіГ·Г ГҐГ¬ Г±ГЁГ¬ГўГ®Г« ГІГ Г©Г«Г  ГЇГ® ГЁГ­Г¤ГҐГЄГ±Г Г¬
     char tile = TileMap[tileY][tileX];
 
-    // Возвращаем true, если тайл является непроходимым
+    // Г‚Г®Г§ГўГ°Г Г№Г ГҐГ¬ true, ГҐГ±Г«ГЁ ГІГ Г©Г« ГїГўГ«ГїГҐГІГ±Гї Г­ГҐГЇГ°Г®ГµГ®Г¤ГЁГ¬Г»Г¬
     return tile == 'H' || tile == 'G';
 }
 
-// Обновление уровня земли для героя
+// ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГіГ°Г®ГўГ­Гї Г§ГҐГ¬Г«ГЁ Г¤Г«Гї ГЈГҐГ°Г®Гї
 void UpdateGroundLevel(Hero* hero) {
     float nearestGround = FLT_MAX;
     bool groundFound = false;
 
-    // Позиция ног персонажа
+    // ГЏГ®Г§ГЁГ¶ГЁГї Г­Г®ГЈ ГЇГҐГ°Г±Г®Г­Г Г¦Г 
     float feetY = hero->y + hero->height;
 
     int tileXStart = (int)(hero->x / TILE_SIZE);
@@ -306,19 +306,19 @@ void UpdateGroundLevel(Hero* hero) {
     if (groundFound) {
         groundLevel = nearestGround;
     } else {
-        groundLevel = FLT_MAX; // Нет земли под персонажем
+        groundLevel = FLT_MAX; // ГЌГҐГІ Г§ГҐГ¬Г«ГЁ ГЇГ®Г¤ ГЇГҐГ°Г±Г®Г­Г Г¦ГҐГ¬
     }
 }
 
 void UpdateHeroPosition(Hero *hero, float deltaTime) {
-    // Обновляем уровень земли для героя
+    // ГЋГЎГ­Г®ГўГ«ГїГҐГ¬ ГіГ°Г®ГўГҐГ­Гј Г§ГҐГ¬Г«ГЁ Г¤Г«Гї ГЈГҐГ°Г®Гї
     UpdateGroundLevel(hero);
 
     if (isAirborne) {
-        hero->y -= verticalVelocity * deltaTime; // Умножаем на deltaTime для корректного применения скорости
-        verticalVelocity += gravity * deltaTime; // Увеличиваем скорость падения
+        hero->y -= verticalVelocity * deltaTime; // Г“Г¬Г­Г®Г¦Г ГҐГ¬ Г­Г  deltaTime Г¤Г«Гї ГЄГ®Г°Г°ГҐГЄГІГ­Г®ГЈГ® ГЇГ°ГЁГ¬ГҐГ­ГҐГ­ГЁГї Г±ГЄГ®Г°Г®Г±ГІГЁ
+        verticalVelocity += gravity * deltaTime; // Г“ГўГҐГ«ГЁГ·ГЁГўГ ГҐГ¬ Г±ГЄГ®Г°Г®Г±ГІГј ГЇГ Г¤ГҐГ­ГЁГї
 
-        // Проверка на достижение земли
+        // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  Г¤Г®Г±ГІГЁГ¦ГҐГ­ГЁГҐ Г§ГҐГ¬Г«ГЁ
         if (hero->y >= groundLevel) {
             hero->y = groundLevel;
             isAirborne = false;
@@ -327,60 +327,60 @@ void UpdateHeroPosition(Hero *hero, float deltaTime) {
         }
     }
 
-    // Проверка направления движения и поворот персонажа
+    // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г ГЇГ°Г ГўГ«ГҐГ­ГЁГї Г¤ГўГЁГ¦ГҐГ­ГЁГї ГЁ ГЇГ®ГўГ®Г°Г®ГІ ГЇГҐГ°Г±Г®Г­Г Г¦Г 
     if (hero->dx < 0) {
-        // Поворот персонажа влево
+        // ГЏГ®ГўГ®Г°Г®ГІ ГЇГҐГ°Г±Г®Г­Г Г¦Г  ГўГ«ГҐГўГ®
         isFlipped = true;
     } if (hero->dx > 0) {
         isFlipped = false;
     }
 
-    // Предполагаемая новая позиция героя
+    // ГЏГ°ГҐГ¤ГЇГ®Г«Г ГЈГ ГҐГ¬Г Гї Г­Г®ГўГ Гї ГЇГ®Г§ГЁГ¶ГЁГї ГЈГҐГ°Г®Гї
     float potentialNewX = hero->x + hero->dx * deltaTime;
     float potentialNewY = hero->y + hero->dy * deltaTime;
 
 
     bool isCeilingHit = false;
-    // Проверка на столкновение и обновление позиции по X
+    // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГҐ ГЁ Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГЇГ®Г§ГЁГ¶ГЁГЁ ГЇГ® X
     if (!CheckCollision(potentialNewX, hero->y, hero, &isCeilingHit)) {
         hero->x = potentialNewX;
     } else {
-        if (isWallHit) { // Если столкновение со стеной
-            hero->dx = 0; // Останавливаем движение
+        if (isWallHit) { // Г…Г±Г«ГЁ Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГҐ Г±Г® Г±ГІГҐГ­Г®Г©
+            hero->dx = 0; // ГЋГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ Г¤ГўГЁГ¦ГҐГ­ГЁГҐ
         }
     }
 
-    // Применение гравитации
+    // ГЏГ°ГЁГ¬ГҐГ­ГҐГ­ГЁГҐ ГЈГ°Г ГўГЁГІГ Г¶ГЁГЁ
     hero->dy -= gravity * deltaTime;
 
-    // Гравитация и обновление позиции по Y
+    // ГѓГ°Г ГўГЁГІГ Г¶ГЁГї ГЁ Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГЇГ®Г§ГЁГ¶ГЁГЁ ГЇГ® Y
     if (!CheckCollision(hero->x, potentialNewY, hero, &isCeilingHit)) {
         hero->y = potentialNewY;
-        hero->isAirborne = true; // Герой в воздухе
+        hero->isAirborne = true; // ГѓГҐГ°Г®Г© Гў ГўГ®Г§Г¤ГіГµГҐ
     } else {
         if (isWallHit) {
-            hero->dy = 0; // Останавливаем падение при столкновении со стеной
+            hero->dy = 0; // ГЋГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЇГ Г¤ГҐГ­ГЁГҐ ГЇГ°ГЁ Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГЁ Г±Г® Г±ГІГҐГ­Г®Г©
 
         }
         else {
-            hero->y += 5; // Коррекция позиции на уровень земли
-            hero->isAirborne = false; // Герой на земле
+            hero->y += 5; // ГЉГ®Г°Г°ГҐГЄГ¶ГЁГї ГЇГ®Г§ГЁГ¶ГЁГЁ Г­Г  ГіГ°Г®ГўГҐГ­Гј Г§ГҐГ¬Г«ГЁ
+            hero->isAirborne = false; // ГѓГҐГ°Г®Г© Г­Г  Г§ГҐГ¬Г«ГҐ
             verticalVelocity = 0;
-            jumpAnimationPlaying = 0; // Останавливаем анимацию прыжка
+            jumpAnimationPlaying = 0; // ГЋГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ Г Г­ГЁГ¬Г Г¶ГЁГѕ ГЇГ°Г»Г¦ГЄГ 
         }
     }
 
-    // Ограничение вертикальной скорости
+    // ГЋГЈГ°Г Г­ГЁГ·ГҐГ­ГЁГҐ ГўГҐГ°ГІГЁГЄГ Г«ГјГ­Г®Г© Г±ГЄГ®Г°Г®Г±ГІГЁ
     if (hero->dy > maxYVelocity) {
         hero->dy = maxYVelocity;
     } else if (hero->dy < -maxYVelocity) {
         hero->dy = -maxYVelocity;
     }
 
-    // Проверка нахождения героя на земле
+    // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г ГµГ®Г¦Г¤ГҐГ­ГЁГї ГЈГҐГ°Г®Гї Г­Г  Г§ГҐГ¬Г«ГҐ
     if (hero->y >= groundLevel && !isWallHit) {
         hero->isAirborne = false;
-        hero->dy = 0; // Прекращаем вертикальное движение
+        hero->dy = 0; // ГЏГ°ГҐГЄГ°Г Г№Г ГҐГ¬ ГўГҐГ°ГІГЁГЄГ Г«ГјГ­Г®ГҐ Г¤ГўГЁГ¦ГҐГ­ГЁГҐ
     } else {
         hero->isAirborne = true;
     }
@@ -416,9 +416,9 @@ void Init(HWND hwnd)
      hero.dy = 0.0f;
 
 
-     // Инициализация позиции героя
-     hero.x = 960.0f;  // Начальная позиция по X
-     hero.y = groundLevel - 80;  // Начальная позиция по Y
+     // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГЇГ®Г§ГЁГ¶ГЁГЁ ГЈГҐГ°Г®Гї
+     hero.x = 960.0f;  // ГЌГ Г·Г Г«ГјГ­Г Гї ГЇГ®Г§ГЁГ¶ГЁГї ГЇГ® X
+     hero.y = groundLevel - 80;  // ГЌГ Г·Г Г«ГјГ­Г Гї ГЇГ®Г§ГЁГ¶ГЁГї ГЇГ® Y
      hero.isAirborne = false;
 }
 
@@ -515,8 +515,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
                           WS_OVERLAPPEDWINDOW,
                           0,
                           0,
-                          1920,
-                          1080,
+                          1900,
+                          900,
                           NULL,
                           NULL,
                           hInstance,
@@ -526,7 +526,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
     /* enable OpenGL for the window */
     EnableOpenGL(hwnd, &hDC, &hRC);
-    RECT rct; //создание переменной с координатами прямоуголника
+    RECT rct; //Г±Г®Г§Г¤Г Г­ГЁГҐ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г®Г© Г± ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГ Г¬ГЁ ГЇГ°ГїГ¬Г®ГіГЈГ®Г«Г­ГЁГЄГ 
 
     UpdateProjection(hwnd);
 
@@ -561,7 +561,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
         {
             /* OpenGL animation code goes here */
             DWORD currentTime = GetTickCount();
-            float deltaTime = 1.0f; // Время в секундах
+            float deltaTime = 1.0f; // Г‚Г°ГҐГ¬Гї Гў Г±ГҐГЄГіГ­Г¤Г Гµ
             lastUpdateTime = currentTime;
 
 
@@ -572,8 +572,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
             DrawCollision();
             float centerX = rct.right / 2.0f;
             float posY = 150.0f;
-            float spriteWidth = 100.0f; // ширина текстуры
-            float spriteHeight = 80.0f; // высота текстуры
+            float spriteWidth = 100.0f; // ГёГЁГ°ГЁГ­Г  ГІГҐГЄГ±ГІГіГ°Г»
+            float spriteHeight = 80.0f; // ГўГ»Г±Г®ГІГ  ГІГҐГЄГ±ГІГіГ°Г»
 
 
                     glEnable(GL_BLEND);
@@ -613,21 +613,21 @@ int WINAPI WinMain(HINSTANCE hInstance,
                     } if (isAirborne) {
                     glPushMatrix();
                     if (!jumpAnimationPlaying) {
-                        jumpFrame = 0; // Начинаем анимацию с первого кадра
-                        jumpAnimationPlaying = 1; // Активируем анимацию прыжка
+                        jumpFrame = 0; // ГЌГ Г·ГЁГ­Г ГҐГ¬ Г Г­ГЁГ¬Г Г¶ГЁГѕ Г± ГЇГҐГ°ГўГ®ГЈГ® ГЄГ Г¤Г°Г 
+                        jumpAnimationPlaying = 1; // ГЂГЄГІГЁГўГЁГ°ГіГҐГ¬ Г Г­ГЁГ¬Г Г¶ГЁГѕ ГЇГ°Г»Г¦ГЄГ 
                     }
                     UpdateAnimationFrame();
 
                     spriteAnimation(textureSprite2, hero.x, hero.y, renderedSpriteWidth, spriteHeight, 1.0f, currentFrame, isFlipped);
 
-                    hero.y -= verticalVelocity; // Вычитаем, потому что движемся вверх
-                    verticalVelocity += gravity; // Добавляем гравитацию
+                    hero.y -= verticalVelocity; // Г‚Г»Г·ГЁГІГ ГҐГ¬, ГЇГ®ГІГ®Г¬Гі Г·ГІГ® Г¤ГўГЁГ¦ГҐГ¬Г±Гї ГўГўГҐГ°Гµ
+                    verticalVelocity += gravity; // Г„Г®ГЎГ ГўГ«ГїГҐГ¬ ГЈГ°Г ГўГЁГІГ Г¶ГЁГѕ
 
                     if (hero.y >= groundLevel) {
                         hero.y = groundLevel;
                         isAirborne = false;
                         verticalVelocity = 0;
-                        jumpAnimationPlaying = 0; // Останавливаем анимацию прыжка
+                        jumpAnimationPlaying = 0; // ГЋГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ Г Г­ГЁГ¬Г Г¶ГЁГѕ ГЇГ°Г»Г¦ГЄГ 
                     }
                     glPopMatrix();
                 }
@@ -686,22 +686,22 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         case WM_KEYDOWN:
 
         switch(wParam) {
-            case VK_LEFT: // Если нажата стрелка влево
+            case VK_LEFT: // Г…Г±Г«ГЁ Г­Г Г¦Г ГІГ  Г±ГІГ°ГҐГ«ГЄГ  ГўГ«ГҐГўГ®
 
-                hero.dx = -15.0f; // Устанавливаем скорость движения влево
+                hero.dx = -15.0f; // Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ Г±ГЄГ®Г°Г®Г±ГІГј Г¤ГўГЁГ¦ГҐГ­ГЁГї ГўГ«ГҐГўГ®
                 isMoving = true;
                 isFlipped = true;
                 break;
-            case VK_RIGHT: // Если нажата стрелка вправо
+            case VK_RIGHT: // Г…Г±Г«ГЁ Г­Г Г¦Г ГІГ  Г±ГІГ°ГҐГ«ГЄГ  ГўГЇГ°Г ГўГ®
 
-                hero.dx = 15.0f; // Устанавливаем скорость движения вправо
+                hero.dx = 15.0f; // Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ Г±ГЄГ®Г°Г®Г±ГІГј Г¤ГўГЁГ¦ГҐГ­ГЁГї ГўГЇГ°Г ГўГ®
                 isMoving = true;
                 isFlipped = false;
                 break;
-            case VK_UP: // Клавиша вверх
+            case VK_UP: // ГЉГ«Г ГўГЁГёГ  ГўГўГҐГ°Гµ
                   if (!isAirborne) {
                         isAirborne = true;
-                        verticalVelocity = jumpSpeed; // Прыжок
+                        verticalVelocity = jumpSpeed; // ГЏГ°Г»Г¦Г®ГЄ
 
         }
                 break;
@@ -718,7 +718,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_KEYUP:
     if (wParam == VK_LEFT || wParam == VK_RIGHT) {
         hero.dx = 0.0f;
-        isMoving = 0; // Обновляем, указывая, что герой больше не движется.
+        isMoving = 0; // ГЋГЎГ­Г®ГўГ«ГїГҐГ¬, ГіГЄГ Г§Г»ГўГ Гї, Г·ГІГ® ГЈГҐГ°Г®Г© ГЎГ®Г«ГјГёГҐ Г­ГҐ Г¤ГўГЁГ¦ГҐГІГ±Гї.
     }
     break;
 
