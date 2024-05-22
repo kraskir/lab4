@@ -418,7 +418,7 @@ void Init(HWND hwnd)
 
      // Èíèöèàëèçàöèÿ ïîçèöèè ãåðîÿ
      hero.x = 960.0f;  // Íà÷àëüíàÿ ïîçèöèÿ ïî X
-     hero.y = groundLevel - 80;  // Íà÷àëüíàÿ ïîçèöèÿ ïî Y
+     hero.y = groundLevel - 120;  // Íà÷àëüíàÿ ïîçèöèÿ ïî Y
      hero.isAirborne = false;
 }
 
@@ -515,8 +515,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
                           WS_OVERLAPPEDWINDOW,
                           0,
                           0,
-                          1900,
-                          900,
+                          1920,
+                          1080,
                           NULL,
                           NULL,
                           hInstance,
